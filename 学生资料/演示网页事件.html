@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta content="text/html;charset=UTF-8">
+	<title>Javascript 网页事件</title>
+	<link rel="stylesheet" href="demo.css">
+</head>
+<body>
+	<a href="http://www.baidu.com">asfd</a>
+	<script>
+		window.onload = function () {
+			alert("window装载");
+		}
+
+		var link = document.getElementsByTagName('link')[0];
+
+		link.onload = function () {
+			alert("外部样式装载成功");
+		}
+		
+	</script>
+</body>
+</html>

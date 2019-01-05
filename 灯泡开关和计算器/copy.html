@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>开关灯</title>
+	<style>
+		.box {
+			width: 400px;
+			text-align: center;
+			margin: 50px auto;
+		}
+
+		.btns {
+			margin-top: 20px;
+		}
+
+		.btns button {
+			margin: 0 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<img src="./close.jpg" alt="">
+		<div class="btns">
+			<!-- <button onclick="open1()">开</button>
+			<button onclick="close1()">关</button> -->
+			<button onclick="change('./open.jpg')">开</button>
+			<button onclick="change('./close.jpg')">关</button>
+		</div>
+	</div>
+	<script>
+
+		var img = document.getElementsByTagName('img')[0];
+
+		// function open1() {
+		// 	img.src = './open.jpg';
+		// }
+
+		// function close1() {
+		// 	img.src = './close.jpg';
+		// }
+
+		function change(url) {
+			img.src = url;
+		}
+	</script>
+</body>
+</html>

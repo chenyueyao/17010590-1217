@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul id="demo">
+		<li style="color: red;">体育</li>
+		<li>音樂</li>
+		<li>訊奔</li>
+		<li>姓名: <input name="username" type="text"></li>
+		<li>密码: <input name="pass" type="password"></li>
+		<li>
+			爱好: <input name="hobby" type="checkbox">音乐
+			<input name="hobby" type="checkbox">读书
+			<input name="hobby" type="checkbox">运动
+			<input name="hobby" type="checkbox">写代码
+		</li>
+	</ul>
+	<script>
+		// 想要操作 文档上的某些元素（标签或盒子）
+		// 就可以像操作对象一样来操作
+
+		// 因为 整个文档(document)就是一个大对象，所有元素可以认为成
+		// document这个对象下的成员
+
+		// console.log(document);
+
+		// 通过一系列的成员方法可以获得所有元素（盒子或标签）
+
+		// 1、通来id来获取
+		// var ul = document.getElementById('demo');
+		// console.log(ul);
+
+		// 2、通过标签名获取
+		// 获得到的是一个伪数组（可以认为成数组），即使只有一个
+		// 也是以数组形式存在
+		// var ul = document.getElementsByTagName('ul');
+		// console.log(ul[0]);
+
+		// 3、通过name属性来获取
+		// 获得到的是一个伪数组，即使只有一个也是以数组形式存在
+		// var input = document.getElementsByName('pass');
+		// var input = document.getElementsByName('hobby');
+		// console.log(input.length);
+
+		// 除以上方法外，还可以相对的方式获取元素
+		var demo = document.getElementById('demo');
+
+		// 属性 parentNode 获取父节点（元素）
+		var body = demo.parentNode;
+		// console.log(body);
+
+		// 
+		var lis = demo.childNodes;
+
+		// console.log(lis.length);
+
+		// 
+		var first = demo.firstChild;
+
+		var last = demo.lastChild;
+
+		console.log(first, last);
+	</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>随机获取数</title>
+	<style type="text/css">
+		body{
+			padding:10px;
+			background:pink; 
+			color:#0000FF; 
+			font-size:20px;
+		}
+	</style>
+	<script type="text/javascript">
+		function getRandom(min,max)
+			{
+				var num = Math.random();          //取得0到1之间的随机小数
+				num = num*(max-min)+min;          //取得min到max之间的随机小数
+				num = Math.floor(num);            //向下取整
+				return num;
+			}
+		document.write("<b>获取10~20之间的随机数是：</b>"+getRandom(1,20));
+	</script>
+</head>
+<body>
+</body>
+</html>

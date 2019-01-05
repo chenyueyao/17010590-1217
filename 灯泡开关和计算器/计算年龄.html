@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+ 	<script type="text/javascript">
+ 		window.onload=function(){
+ 			//先获取 button对象
+ 			var B=document.getElementById("btn");
+  			B.onclick=function(){
+ 				 //点击按钮之后获取用户输入到文本框的那个值
+ 			var year=document.getElementById("txt").value;
+
+ 			alert(2017-year);
+ 		}
+ 		}
+ 	</script>
+
+</head>
+
+<body>
+ 
+ 	<input type="text" id="txt"/>
+    <button id="btn">计算年龄</button>
+
+</body>
+</html>

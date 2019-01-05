@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>打砖块</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		canvas{
+			background: #eee;
+			display: block;
+			margin: 0 auto;
+		}
+		#moudle{
+			background-color: #000;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			position: fixed;
+			opacity: 0;
+			transition:all .3s; 
+		}
+		#moudle .tu{
+			width: 200px;
+			height: 200px;
+			margin: 0 auto;
+		}
+		#moudle .down{
+			text-align: center;
+			margin-top: 10px;
+		}
+		#moudle .down button{
+			width: 98px;
+			height: 30px;
+			border-radius: 5px;
+			outline: none;
+			font-weight: bold;
+			background-color: #99CDFF; 
+		}
+		#moudle .down button:hover{
+			background-color: #333365;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+<div id="moudle">
+	<div class="tu" id="tu"></div>
+	<div class="down">
+		<button onclick="recur()">再来一次</button>
+		<button onclick="alert('不玩也得玩！！！')">不想玩了</button>
+	</div>
+</div>
+<!-- 改进0 -->
+<canvas id="myCanvas" width="435" height="320">您的浏览器不支持canvas标签</canvas>
+<script type="text/javascript">
+// 画布
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+// 圆球的半径
+var ballRadius = 10;
+// 底块的位置
+var x = canvas.width/2;
+var y = canvas.height-30;
+// 底块的移动
+var dx = 2;
+var dy = -2;
+// 底块的大小
+var paddleHeight = 10;
+var paddleWidth = 75;
+// 底块的初始位置
+var paddleX = (canvas.width-paddleWidth)/2;
+// 移动的状态
+var rightPressed = false;
+var leftPressed = false;
+
+// 上边方块的行列
+// 改进-1
+var brickRowCount = 10;
+var brickColumnCount = 5;
+// 上方方块的大小
+// 改进-2
+var brickWidth = 35;
+var brickHeight = 15;
+// 方块之间的边距
+// 改进-3
+var brickPadding = 5;
+// 整体距离上边和左边的距离
+// 改进-4
+var brickOffsetTop = 20;
+var brickOffsetLeft = 20;
+// 分数
+var score = 0;
+// 命
+// var lives = 3;
+
+var moudle = document.getElementById("moudle");
+var tu = document.getElementById("tu");
+
+// 生成二维数组,保存所有小方块的初始状态
+var bricks = [];
+
+for(c=0; c<brickColumnCount; c++) {
+    bricks[c] = [];
+    for(r=0; r<brickRowCount; r++) {
+        // 改进-5
+        bricks[c][r] = { x: 0, y: 0, status: Math.ceil(Math.random()*3) };
+    }
+}
+
+// 添加方法，键盘按下，键盘抬起，鼠标移动
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("mousemove", mouseMoveHandler, false);
+
+
+// 是否暂停
+var stop = false;
+
+// 键盘按下方法
+function keyDownHandler(e) {
+	// console.log(e.keyCode);
+    if(e.keyCode == 39) {
+        rightPressed = true;
+    }
+    else if(e.keyCode == 37) {
+        leftPressed = true;
+    }else if(e.keyCode == 32){
+    	if(stop == false){
+    		isStop();	
+    		stop = true;
+    	}else{
+    		isStop();
+    		stop = false;
+    	}
+
+    }
+}
+// 键盘抬起方法
+function keyUpHandler(e) {
+    if(e.keyCode == 39) {
+        rightPressed = false;
+    }
+    else if(e.keyCode == 37) {
+        leftPressed = false;
+    }
+}
+// 鼠标华东方法
+function mouseMoveHandler(e) {
+    var relativeX = e.clientX - canvas.offsetLeft;
+    console.log(canvas.offsetLeft);
+    if(relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - paddleWidth/2;
+    }
+}
+
+
+// 对小方块进行判断的函数
+function collisionDetection() {
+    for(c=0; c<brickColumnCount; c++) {
+        for(r=0; r<brickRowCount; r++) {
+            var b = bricks[c][r];
+            // 判断小方块当前的状态 如果为1 进入
+            // 改进-6
+            if(b.status >= 1) {
+            	// 判断小球是否撞到方块
+                if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
+                    dy = -dy;
+                    // 改变小球的状态
+                    // 改进-7
+                    b.status--;
+                    // 加分数
+                    if(b.status == 0){
+                        score++;
+                    }
+                    // 游戏结束，顺利过关
+                    if(score == brickRowCount*brickColumnCount) {
+                        moudle.style.opacity = ".8";
+            			tu.style.backgroundImage="url(chiji.jpg)";
+            			clearInterval(timer);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 绘制小球
+function drawBall() {
+    ctx.beginPath();
+    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+}
+// 绘制底板
+function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+}
+
+// 绘制方块
+function drawBricks() {
+    for(c=0; c<brickColumnCount; c++) {
+        for(r=0; r<brickRowCount; r++) {
+        	// 判断状态为1才绘制
+            // 改进-8
+            if(bricks[c][r].status >= 1) {
+            	// 设置每一个方块的位置信息
+                var brickX = (r*(brickWidth+brickPadding))+brickOffsetLeft;
+                var brickY = (c*(brickHeight+brickPadding))+brickOffsetTop;
+                // 重新调整每一个方块的位置
+                bricks[c][r].x = brickX;
+                bricks[c][r].y = brickY;
+                // 绘制每一个小方块
+                ctx.beginPath();
+                ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                // 改进-9
+                if(bricks[c][r].status==1){
+                  ctx.fillStyle = "#0095DD";
+                }else if(bricks[c][r].status==2){
+                    ctx.fillStyle = "#DC7E34";
+                }else if(bricks[c][r].status==3){
+                    ctx.fillStyle = "#A72120";
+                }
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+    }
+}
+// 绘制分数
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Score: "+score, 8, 20);
+}
+
+
+
+// 绘制主方法
+function draw() {
+	// 清除画布所有内容
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // 调用绘制方块
+    drawBricks();
+    // 调用绘制小球
+    drawBall();
+    // 调用绘制底板
+    drawPaddle();
+    // 调用绘制分数
+    drawScore();
+    // 调用绘制命
+    // drawLives();
+    // 调用判断绘制方法
+    collisionDetection();
+
+
+    // 设置小球的行走路径
+    // 当小球的x方向大于整个画布的宽度-圆球半径或者x方向小于圆球半径时
+    if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+        dx = -dx;
+    }
+    // 当小球y方向小于圆球半径时
+    if(y + dy < ballRadius) {
+        dy = -dy;
+    }else if(y + dy > canvas.height-ballRadius) { // 当小球y方向大于画布高度-圆球半径时
+
+    	// 判断：小球落在底板上时
+        if(x > paddleX-20 && x < paddleX + paddleWidth+20) {
+            dy = -dy;
+        }else {
+            	setTimeout(function(){
+            		moudle.style.opacity = ".8";
+            		tu.style.backgroundImage="url(yihan.jpg)";
+            		// alert("GAME OVER");
+            		// document.location.reload();
+            		clearInterval(timer);
+            	},300);
+        }
+    }
+    
+    // 底板的移动
+    if(rightPressed && paddleX < canvas.width-paddleWidth) {
+        paddleX += 7;
+    }
+    else if(leftPressed && paddleX > 0) {
+        paddleX -= 7;
+    }
+    
+    // 小球的移动
+    x += dx;
+    y += dy;
+    // requestAnimationFrame(draw);
+}
+
+// 暂停
+function isStop(){
+	// 如果是暂停，则开始
+	console.log(stop);
+	if(stop){
+		timer = setInterval(draw, 10);
+	}else{
+		clearInterval(timer);
+	}
+}
+
+// 再来一次方法
+function recur(){
+	setTimeout(function(){
+		moudle.style.opacity = "0";
+	},300);
+	window.location.reload();
+}
+
+var timer = setInterval(draw, 10);
+// draw();
+</script>
+</body>
+</html>

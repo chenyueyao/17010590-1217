@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta content="text/html;charset=UTF-8">
+	<title>Javascript 事件</title>
+	<style>
+		.box {
+			width: 300px;
+			height: 300px;
+			text-align: center;
+			line-height: 300px;
+			font-size: 30px;
+			margin: 100px auto;
+			background-color: green;
+		}
+		.change{
+			width: 300px;
+			height: 300px;
+			border-radius: 50%;
+			text-align: center;
+			line-height: 300px;
+			font-size: 30px;
+			margin: 100px auto;
+			background-color: pink;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+	<script>
+		// 伪数组
+		var box = document.getElementsByTagName('div');
+
+		box[0].onmouseover = function () {
+			this.innerHTML = '鼠标经过了';
+			this.className="box";
+		}
+
+		box[0].onmouseout = function () {
+			this.innerHTML = '鼠标离开了';
+			this.className="box";
+		}
+
+		box[0].onclick = function () {
+			this.innerHTML = '鼠标点击了';
+			this.className="change";
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta content="text/html;charset=UTF-8">
+	<title>Javascript引入方式</title>
+	<!-- 通过一个 script 标签 可以执行 javascript 的代码 -->
+	<script>
+		// js 代码
+		document.write('hello world!');
+		window.alert('hello world!');             //浏览器运行的JS全局对象window，常用的方法
+		window.confirm("hello world!");
+		var input1=window.prompt("输入你的年龄");   
+		alert("你的年龄是"+input1);
+		// 对于运行在浏览器端的JavaScript程序，还有另一个全局对象：window。window全局对象提供了与当前窗口、页面有关的诸多属性与方法；除了这些与浏览器有关的全局属性和方法，window对象还封装了JS全局对象，并向外暴露JS全局对象的属性与接口；因此，当进行浏览器端JavaScript编程时，只需关心window全局对象即可。
+  //      对于JavaScript程序中的this，如果this不属于任何function，那么这个this就指代JS全局对象；如果是浏览器端运行的JS程序，那么这个this就指代window全局对象。
+  //      如果这个this属于某个类的方法，则this指代的就是调用该function的对象。
+	</script>
+	<!-- 引入一个外部的 js -->
+	<!-- <script src="./example.js"></script> -->
+
+	<!-- 不可取 -->
+<!-- 	<script src="./example.js">
+		document.write(1111);
+	</script> -->
+</head>
+<body>
+	
+</body>
+</html>

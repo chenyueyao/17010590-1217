@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>网页时钟</title>
+	<style type="text/css">
+		span {
+			display: block;
+			text-align: center;
+			font-size: 28px;
+		}
+	</style>
+</head>
+<body>
+	<span id="result"></span>
+	<script type="text/javascript">
+
+		function time() {
+			var now = new Date();
+
+			var y = now.getFullYear();
+			var m = now.getMonth() + 1;
+			var d = now.getDate();
+
+			var h = now.getHours();
+			var M = now.getMinutes();
+			var s = now.getSeconds();
+
+			h = h < 10 ? '0' + h : h;
+			M = M < 10 ? '0' + M : M;
+			s = s < 10 ? '0' + s : s;
+
+			console.log(y + '-' + m + '-' + d + ' ' + h + ':' + M + ':' + s);
+
+			// document.write(y + '-' + m + '-' + d + ' ' + h + ':' + M + ':' + s);
+			var result = document.getElementById('result');
+
+			result.innerHTML = y + '-' + m + '-' + d + ' ' + h + ':' + M + ':' + s;
+		}
+
+		setInterval(time, 1000);
+
+
+
+	</script>
+</body>
+</html>

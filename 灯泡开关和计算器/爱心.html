@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		div {
+			width: 200px;
+			height: 200px;
+			background-color: red;
+			margin: 200px auto;
+			transform: rotate(45deg);
+			filter: drop-shadow(0px 0px 30px red);       /*滤镜*/
+			opacity: 0.7;
+			animation: jump 1s linear infinite;  /*匀速1s中跳动一次*/
+
+		}
+
+		/*声明，调用动画*/
+		@keyframes jump{
+			70%{
+				transform: scale(.7) rotate(45deg);   /*时间在70%时的样式，慢慢缩小*/
+			}
+			100%{
+				transform: scale(1.2) rotate(45deg);    /*时间在100%时的样式，快速放大*/
+			}
+
+		}
+
+		div:before{
+			content: "";
+			display: block;
+			width: 200px;
+			height: 200px;
+			background-color: red;
+
+			position: relative;
+			left:-100px;
+			top: 0px;
+			border-radius: 50%;
+		}
+
+		div:after{
+			content: "";
+			display: block;
+			width: 200px;
+			height: 200px;
+			background-color: red;
+
+			position: relative;
+			left: 0px;
+			top:-300px;
+			border-radius: 50%;
+
+		}		
+	</style>
+</head>
+<body>
+	<div></div>
+
+</body>
+</html>

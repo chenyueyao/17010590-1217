@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表格</title>
+	<style>
+		table {
+			width: 400px;
+			margin: 50px auto;
+			border: 1px solid #CCC;
+			border-collapse: collapse;
+		}
+
+		td, th {
+			height: 40px;
+			text-align: center;
+			border: 1px solid #CCC;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<caption>DOM练习</caption>
+		<thead>
+			<tr>
+				<th width="200">姓名</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="text"></td>
+				<td><input type="button" value="确定" onclick="change()"></td>
+			</tr>
+		</tbody>
+	</table>
+	<script>
+		function change() {
+			var input = document.getElementsByTagName('input')[0];
+			var span = document.createElement('span');
+			var td = document.getElementsByTagName('td')[0];
+
+			var value = input.value;
+
+			span.innerText = value;
+
+			td.replaceChild(span, input);
+		}
+		
+	</script>
+</body>
+</html>

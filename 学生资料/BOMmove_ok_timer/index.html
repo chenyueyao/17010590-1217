@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>图片移动</title>
+        <meta charset="utf-8" />
+    </head>
+    <style>
+        #box{
+            width: 100px;
+            position:absolute;
+            left:0px;
+            top:0px;
+        }
+        #box img{
+            width: 100%;
+        }
+    </style>
+    <body>
+        <div id="box">
+            <img src="./logo.jpg" >
+        </div>
+        <script>
+            var movImg = document.getElementById('box');
+            var speed_x = 8;
+            var speed_y = 8;
+            var pos_x = 0;
+            var pos_y = 0;
+            window.setInterval(mov,10);
+            function mov() {
+                pos_x += 1 * speed_x;
+                pos_y += 1 * speed_y;
+                movImg.style.left = pos_x + 'px';
+                movImg.style.top = pos_y + 'px';
+                if(pos_x < 0 || pos_x + movImg.offsetWidth >= document.documentElement.clientWidth) {
+                    speed_x = -speed_x;
+                }
+                if(pos_y < 0 || pos_y + movImg.offsetHeight >= document.documentElement.clientHeight) {
+                    speed_y = -speed_y;
+                }            
+            }       
+         </script>
+    </body>
+</html>

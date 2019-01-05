@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Javascript 事件</title>
+	<style>
+		.box {
+			width: 300px;
+			height: 300px;
+			text-align: center;
+			line-height: 300px;
+			font-size: 30px;
+			margin: 100px auto;
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+	<script>
+		// 伪数组
+		var box = document.getElementsByTagName('div');
+
+		box[0].onmouseover = function () {
+			this.innerHTML = '鼠标经过了';
+		}
+
+		box[0].onmouseout = function () {
+			this.innerHTML = '鼠标离开了';
+		}
+
+		box[0].onclick = function () {
+			this.innerHTML = '鼠标点击了';
+		}
+	</script>
+</body>
+</html>

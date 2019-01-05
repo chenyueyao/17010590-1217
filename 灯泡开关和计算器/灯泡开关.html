@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<title>灯泡开关</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<script type="text/javascript">
+    function change(n) {
+        var po = document.getElementsByTagName('img')[0];
+        if(n == '0') {
+            po.src = 'close.jpg';
+        }
+        if(n == '1') {
+            po.src = 'open.jpg';
+        }
+    }
+</script>
+
+<style type="text/css">
+    #pop {
+        width:960px;
+        margin:auto;
+        text-align:center;
+    }
+</style>
+</head>
+    <body>
+        <div id="pop">
+            <img src="close.jpg" />
+            <p>
+                <input type="button" value="开"  onclick="change('1')" />&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="button" value="关"  onclick="change('0')" />
+            </p>
+        </div>
+    </body>
+</html>

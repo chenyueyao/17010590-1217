@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<title>图片移动</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<script type="text/javascript">
+    window.onload = function () {
+        var movImg = document.getElementById('mov');
+        var speed_x = 1;
+        var speed_y = 1;
+        var pos_x = 0;
+        var pos_y = 0;
+
+        function mov() {
+            pos_x += 1 * speed_x;
+            pos_y += 1 * speed_y;
+
+            movImg.style.left = pos_x + 'px';
+            movImg.style.top = pos_y + 'px';
+            if(pos_x < 0 || pos_x + movImg.offsetWidth >= document.documentElement.clientWidth) {
+                speed_x = -speed_x;
+            }
+            if(pos_y < 0 || pos_y + movImg.offsetHeight >= document.documentElement.clientHeight) {
+                speed_y = -speed_y;
+            }            
+        }
+        newMov = mov;
+        window.setInterval('newMov()',10);
+    }
+    
+</script>
+
+<style type="text/css">
+</style>
+</head>
+    <body>
+        <div id="mov" style="position:absolute;left:0px;top:0px;">
+        <img src="logo.jpg" width="100" />
+        </div>
+    </body>
+</html>
